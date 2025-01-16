@@ -1,0 +1,95 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.shape:first-child {
+    background: linear-gradient(#020202, #00e1ff, #ffffff);
+    left: -80px;
+    top: -80px;
+}
+
+.shape:last-child {
+    background: linear-gradient(#ffffff, #00e1ff, #020202);
+    right: -80px;
+    bottom: -80px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    margin: 0;
+    padding-left: 220px;
+    padding-bottom: 25%;
+    padding-top: 25%;
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    border-radius: 10px;
+    max-width: 400px; 
+    padding: 20px;
+}
+
+/* Heading Styling */
+h1, h2 {
+    font-weight: bold;
+    color: #212529; /* Dark Gray / Black */
+    text-align: center;
+}
+
+.card h3 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #212529; /* Dark Gray */
+    text-align: center;
+}
+
+/* Paragraph and List Items Styling */
+p, li {
+    color: #212529; /* Dark Gray */
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Button Styling */
+a.btn.btn-dark {
+    color: #fff !important; /* Ensure white text */
+    background-color: #212529; /* Dark Gray/Black */
+    border-color: #212529;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a.btn.btn-dark:hover {
+    background-color: #000; /* Black on hover */
+    border-color: #000;
+}
+
+/* Info Text Styling */
+.text-info {
+    font-weight: 500;
+    color: #212529;
+    text-decoration: none;
+}
+
+.text-info:hover {
+    color: #007bff; /* Blue on hover */
+    text-decoration: underline;
+}

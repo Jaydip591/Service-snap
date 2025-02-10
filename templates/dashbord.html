@@ -68,26 +68,25 @@
                 <span class="close-btn" onclick="closeSidePanel()">&times;</span>
                 <div id="userInfo">
                     {% if user %}
-                    <br><br>
-
-                    <p>User Information:</p>
-                    <ul>
-                        <li>ID: {{ user[0] }}</li>
-                        <li>
-                            Name: 
-                            <span id="displayName">{{ user[1] }}</span>
-                            <input type="text" id="editName" value="{{ user[1] }}" class="hidden form-control" />
-                        </li>
-                        <li>
-                            Email: 
-                            <span id="displayEmail">{{ user[2] }}</span>
-                            <input type="email" id="editEmail" value="{{ user[2] }}" class="hidden form-control" />
-                        </li>
-                    </ul>
-                    <button class="btn btn-primary" id="editButton" onclick="toggleEdit(true)">Edit</button>
-                    <button class="btn btn-success hidden" id="saveButton" onclick="saveChanges()">Save</button>
-                    <button class="btn btn-secondary hidden" id="cancelButton" onclick="toggleEdit(false)">Cancel</button>
-                    {% endif %}
+            <p>User Information:</p>
+            <ul>
+                <li>ID: {{ user[0] }}</li>
+                <li>
+                    Name:
+                    <span id="displayName">{{ user[1] }}</span>
+                    <input type="text" id="editName" value="{{ user[1] }}" class="hidden form-control">
+                </li>
+                <li>
+                    Email:
+                    <span id="displayEmail">{{ user[2] }}</span>
+                    <input type="email" id="editEmail" value="{{ user[2] }}" class="hidden form-control">
+                </li>
+                
+            </ul>
+            <button class="btn btn-primary" id="editButton" onclick="toggleEdit(true)">Edit</button>
+            <button class="btn btn-success hidden" id="saveButton" onclick="saveChanges()">Save</button>
+            <button class="btn btn-secondary hidden" id="cancelButton" onclick="toggleEdit(false)">Cancel</button>
+            {% endif %}
                 </div>
             </div>
 

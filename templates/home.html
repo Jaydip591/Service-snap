@@ -16,6 +16,29 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
+    .side-panel {
+      width: 350px;
+      position: fixed;
+      top: 0;
+      right: -350px;
+      height: 100%;
+      background-color: #f8f9fa;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      padding: 20px;
+      z-index: 1040;
+  }
+
+  .side-panel.open {
+      right: 0;
+  }
+
+  .close-btn {
+      font-size: 20px;
+      cursor: pointer;
+      float: right;
+  }
+
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
@@ -182,7 +205,7 @@
             <a class="nav-link text-dark fw-semibold" href="#">About</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link text-dark fw-semibold" href="#">Services</a>
+            <a class="nav-link text-dark fw-semibold" href="#container">Services</a>
           </li>
           <li class="nav-item me-3">
             <a class="nav-link text-dark fw-semibold" href="#">Contact</a>
@@ -191,7 +214,45 @@
         <a href="/logout" class="btn btn-dark jd ms-lg-3">Logout</a>
       </div>
     </div>
+    <a href="javascript:void(0)" onclick="openSidePanel()">
+      <i class="fas fa-user m-3" style="color: black; font-size: 24px;"></i>
+  </a>
   </nav>
+  
+
+  <div id="sidePanel" class="side-panel">
+    <span class="close-btn" onclick="closeSidePanel()">&times;</span>
+    <div id="userInfo">
+        {% if user %}
+        <p>User Information:</p>
+        <ul>
+            <li>
+                Name:
+                <span id="displayName">{{ user[1] }}</span>
+                <input type="text" id="editName" value="{{ user[1] }}" class="hidden form-control">
+            </li>
+            <li>
+                Email:
+                <span id="displayEmail">{{ user[3] }}</span>
+                <input type="email" id="editEmail" value="{{ user[2] }}" class="hidden form-control">
+            </li>
+            <li>
+                Mobile:
+                <span id="displayMobile">{{ user[4] }}</span>
+                <input type="text" id="editMobile" value="{{ user[5] }}" class="hidden form-control">
+            </li>
+            <li>
+                City:
+                <span id="displayCity">{{ user[6] }}</span>
+                <input type="text" id="editCity" value="{{ user[6] }}" class="hidden form-control">
+            </li>
+        </ul>
+        <button class="btn btn-primary" id="editButton" onclick="toggleEdit(true)">Edit</button>
+        <button class="btn btn-success hidden" id="saveButton" onclick="saveChanges()">Save</button>
+        <button class="btn btn-secondary hidden" id="cancelButton" onclick="toggleEdit(false)">Cancel</button>
+        {% endif %}
+    </div>
+</div>
 
 
   <div class="hero">
@@ -286,7 +347,19 @@
   <footer>
     <p>&copy; 2025 Service Snap. All Rights Reserved.</p>
   </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  
+  
+    function openSidePanel() {
+      document.getElementById('sidePanel').classList.add('open');
+  }
+
+  function closeSidePanel() {
+      document.getElementById('sidePanel').classList.remove('open');
+  }
+  </script>
 </body>
 
 </html>

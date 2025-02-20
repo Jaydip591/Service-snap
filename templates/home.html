@@ -154,12 +154,12 @@
 
     }
     .service-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation for scaling and shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
   
     .service-card:hover {
-      transform: translateY(-10px); /* Lift the card on hover */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Add shadow for a 3D effect */
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
     footer {
       background-color: #f7f7f7;
@@ -241,11 +241,7 @@
                 <span id="displayMobile">{{ user[4] }}</span>
                 <input type="text" id="editMobile" value="{{ user[5] }}" class="hidden form-control">
             </li>
-            <li>
-                City:
-                <span id="displayCity">{{ user[6] }}</span>
-                <input type="text" id="editCity" value="{{ user[6] }}" class="hidden form-control">
-            </li>
+
         </ul>
         <button class="btn btn-primary" id="editButton" onclick="toggleEdit(true)">Edit</button>
         <button class="btn btn-success hidden" id="saveButton" onclick="saveChanges()">Save</button>

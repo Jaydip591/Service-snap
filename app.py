@@ -168,10 +168,11 @@ def admin():
         cursor = mysql.connection.cursor()
         cursor.execute("SELECT * FROM Admin WHERE Email=%s", (email,))
         user = cursor.fetchone()
+        print(user[2])
         cursor.close()
         if user and bcrypt.checkpw(password.encode('utf-8'), user[3].encode('utf-8')):
             session['user_id'] = user[0]
-            return redirect(url_for('admin_dashbord',user=user))
+            return redirect(url_for('admin_dashbord'))
         else:
             flash("Invalid email or password", "danger")
             return redirect(url_for('admin'))
@@ -189,13 +190,13 @@ def admin_dashbord():
     if 'user_id' in session:
         user_id = session['user_id']
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT *FROM service_provider WHERE S_id=%s", (user_id,))
+        cursor.execute("SELECT *FROM admin WHERE ID=%s", (user_id,))
         user = cursor.fetchone()
         cursor.close()
-
+        print(user[2])
         if user:
-            return render_template('dashbord.html', client_table=client_table, service_provider=service_provider)
-    
+            return render_template('dashbord.html', client_table=client_table, service_provider=service_provider,user=user)
+    return render_template('admin.html')
 
 
     

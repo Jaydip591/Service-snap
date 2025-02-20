@@ -63,12 +63,13 @@
             <a href="javascript:void(0)" onclick="openSidePanel()">
                 <i class="fa-solid fa-user m-3" style="color: black; font-size: 24px;"></i>
             </a>
+    </nav>
 
-            <div id="sidePanel" class="side-panel">
-                <span class="close-btn" onclick="closeSidePanel()">&times;</span>
-                <div id="userInfo">
-                    {% if user %}
-            <p>User Information:</p>
+    <div id="sidePanel" class="side-panel">
+        <span class="close-btn" onclick="closeSidePanel()">&times;</span>
+        <div id="userInfo">
+            {% if user %}
+            <p>Admin Information:</p>
             <ul>
                 <li>ID: {{ user[0] }}</li>
                 <li>
@@ -81,17 +82,16 @@
                     <span id="displayEmail">{{ user[2] }}</span>
                     <input type="email" id="editEmail" value="{{ user[2] }}" class="hidden form-control">
                 </li>
-                
+
             </ul>
             <button class="btn btn-primary" id="editButton" onclick="toggleEdit(true)">Edit</button>
             <button class="btn btn-success hidden" id="saveButton" onclick="saveChanges()">Save</button>
             <button class="btn btn-secondary hidden" id="cancelButton" onclick="toggleEdit(false)">Cancel</button>
             {% endif %}
-                </div>
-            </div>
-
         </div>
-    </nav>
+    </div>
+
+
 
     <div class="container mt-5">
         <h1 class="text-center">Admin Dashboard</h1>

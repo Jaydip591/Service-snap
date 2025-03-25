@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, BooleanField, SubmitField,SelectField
-from wtforms.validators import email,DataRequired,length
-
+from wtforms import StringField, PasswordField, EmailField, BooleanField, SubmitField,SelectField,TextAreaField
+from wtforms.validators import email,DataRequired,length,EqualTo
+from flask_wtf.file import FileField,file_allowed
 class Registrationform(FlaskForm):
     name= StringField('name', validators=[DataRequired(), length(min=4 , max=20)])
     email= EmailField('Email', validators=[DataRequired(), email()])
@@ -36,3 +36,25 @@ class Admin(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired() ])
     Remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class AdminRegistrationForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), length(min=3, max=100)])
+    email = EmailField('Email', validators=[DataRequired(), email()])
+    password = PasswordField('Password', validators=[
+        DataRequired(),
+        length(min=8, message="Password must be at least 8 characters long")
+    ])
+    confirm_password = PasswordField('Confirm Password', validators=[
+        DataRequired(),
+        EqualTo('password', message='Passwords must match')
+    ])
+    submit = SubmitField('Create Admin')
+    
+class accountupdateform(FlaskForm):
+    picture = FileField(label="profile_picture",validators=[file_allowed(['jpg','png'])])
+    submit=SubmitField('submit')
+    
+class RequestForm(FlaskForm):
+    provider_id = StringField('Provider ID', validators=[DataRequired()])
+    service_description = TextAreaField('Service Description', validators=[DataRequired()])
+    submit = SubmitField('Request Service')

@@ -1,0 +1,176 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card stats-card" style="border-left: 4px solid #4e73df;">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="text-primary fw-bold">Clients</h6>
+                        <h3 class="mt-2">{{ clients_count }}</h3>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user fa-2x text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card stats-card" style="border-left: 4px solid #1cc88a;">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="text-success fw-bold">Service Providers</h6>
+                        <h3 class="mt-2">{{ providers_count }}</h3>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-briefcase fa-2x text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card stats-card" style="border-left: 4px solid #36b9cc;">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="text-info fw-bold">Appointments</h6>
+                        <h3 class="mt-2">{{ appointments|length }}</h3>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar-check fa-2x text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Client Table -->
+<div class="card mb-4" id="clientTable">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Clients</h5>
+        <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#clientTableContent">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+    <div class="collapse show" id="clientTableContent">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>City</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in client_table %}
+                        <tr>
+                            <td>{{ client[0] }}</td>
+                            <td>{{ client[1] }}</td>
+                            <td>{{ client[3] }}</td>
+                            <td>{{ client[4] }}</td>
+                            <td>{{ client[5] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Service Provider Table -->
+<div class="card mb-4" id="serviceProviderTable">
+    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Service Providers</h5>
+        <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#serviceProviderTableContent">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+    <div class="collapse show" id="serviceProviderTableContent">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Skills</th>
+                            <th>Mobile</th>
+                            <th>City</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for provider in service_provider %}
+                        <tr>
+                            <td>{{ provider[0] }}</td>
+                            <td>{{ provider[1] }}</td>
+                            <td>{{ provider[2] }}</td>
+                            <td>{{ provider[4] }}</td>
+                            <td>{{ provider[5] }}</td>
+                            <td>{{ provider[6] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Appointments Table -->
+<div class="card mb-4" id="appointmentsTable">
+    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Appointments</h5>
+        <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#appointmentsTableContent">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+    <div class="collapse show" id="appointmentsTableContent">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Client ID</th>
+                            <th>Provider ID</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appt in appointment %}
+                        <tr>
+                            <td>{{ appt[0] }}</td>
+                            <td>{{ appt[1] }}</td>
+                            <td>{{ appt[2] }}</td>
+                            <td>{{ appt[3] }}</td>
+                            <td>{{ appt[4] }}</td>
+                            <td>{{ appt[5] }}</td>
+                            <td>{{ appt[6] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

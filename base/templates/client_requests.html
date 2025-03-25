@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">My Service Requests</h2>
+    
+    {% if requests %}
+        <div class="row">
+            {% for request in requests %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            Service Request to {{ request.provider_name }}
+                            <span class="badge {% if request.status == 'pending' %}bg-warning
+                                             {% elif request.status == 'accepted' %}bg-success
+                                             {% else %}bg-danger{% endif %} float-end">
+                                {{ request.status|title }}
+                            </span>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Date:</strong> {{ request.appointment_date }}</p>
+                                <p><strong>Time:</strong> {{ request.appointment_time }}</p>
+                                <p><strong>Address:</strong> {{ request.address }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Provider Email:</strong> {{ request.provider_email }}</p>
+                                <p><strong>Provider Phone:</strong> {{ request.provider_phone }}</p>
+                                <p><strong>Description:</strong> {{ request.description or 'No description provided' }}</p>
+                            </div>
+                        </div>
+                        
+                        {% if request.response_message %}
+                        <div class="mt-3">
+                            <h6>Provider's Response:</h6>
+                            <p class="text-muted">{{ request.response_message }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            You haven't made any service requests yet.
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 

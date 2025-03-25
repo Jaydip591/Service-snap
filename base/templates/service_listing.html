@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>Available Services</h2>
+            <p class="text-muted">Find and book services in your area</p>
+        </div>
+        <div class="col-md-6">
+            <form method="POST" class="d-flex justify-content-end">
+                <div class="input-group" style="max-width: 300px;">
+                    <select name="city" class="form-select">
+                        <option value="">All Cities</option>
+                        {% for city in cities %}
+                        <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>
+                            {{ city }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if providers %}
+        <div class="row">
+            {% for provider in providers %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('service.get_photo', user_id=provider.s_id) }}" 
+                         class="card-img-top" alt="{{ provider.s_name }}"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ provider.s_name }}</h5>
+                        <p class="card-text text-muted">
+                            <i class="fas fa-map-marker-alt"></i> {{ provider.s_city }}
+                        </p>
+                        <p class="card-text">
+                            <i class="fas fa-phone"></i> {{ provider.s_mobile }}<br>
+                            <i class="fas fa-envelope"></i> {{ provider.s_email }}
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <i class="fas fa-tools"></i> Skills: {{ provider.s_skills }}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <button type="button" class="btn btn-primary w-100" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#appointmentModal{{ provider.s_id }}">
+                            Request Service
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Appointment Modal -->
+                <div class="modal fade" id="appointmentModal{{ provider.s_id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Request Service from {{ provider.s_name }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <form action="{{ url_for('service.submit_appointment') }}" method="POST">
+                                <div class="modal-body">
+                                    <input type="hidden" name="service_provider_id" value="{{ provider.s_id }}">
+                                    
+                                    <div class="mb-3">
+                                        <label for="appointment_date" class="form-label">Appointment Date</label>
+                                        <input type="date" class="form-control" id="appointment_date" 
+                                               name="appointment_date" required 
+                                               min="{{ now.strftime('%Y-%m-%d') }}">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="appointment_time" class="form-label">Preferred Time</label>
+                                        <input type="time" class="form-control" id="appointment_time" 
+                                               name="appointment_time" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" 
+                                               name="email" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">Service Address</label>
+                                        <textarea class="form-control" id="address" name="address" 
+                                                  rows="2" required></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Service Description</label>
+                                        <textarea class="form-control" id="description" name="description" 
+                                                  rows="3" placeholder="Please describe the service you need..."></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No service providers found in the selected city.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
